@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Engineering & Analytics — Complete Knowledge Base</title>
+  <meta name="description" content="Master the end-to-end modern data stack: Git, SQL, PySpark, Azure, Power BI, Generative AI and more across 31 structured modules." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">DataStack<span class="logo-accent">Pro</span></span>
+    </div>
+    <div class="nav-stats">
+      <div class="stat-chip" id="nav-progress-chip">
+        <span class="stat-label">Overall Progress</span>
+        <span class="stat-value" id="nav-overall-pct">0%</span>
+      </div>
+      <div class="stat-chip">
+        <span class="stat-label">Modules</span>
+        <span class="stat-value">31</span>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle sidebar">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h3>Navigation</h3>
+    <button class="close-sidebar" id="close-sidebar">✕</button>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="search-input" placeholder="🔍 Search topics…" />
+  </div>
+  <nav class="sidebar-nav" id="sidebar-nav">
+    <!-- Injected by JS -->
+  </nav>
+</aside>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span>📚</span> Complete Knowledge Base
+    </div>
+    <h1 class="hero-title">Data Engineering<br/>&amp; Analytics</h1>
+    <p class="hero-sub">Master the end-to-end modern data stack — Raw Data → Clean → Model → Analyze → Visualize → Deploy → Secure</p>
+    <div class="hero-tags">
+      <span class="tag">#data-engineering</span>
+      <span class="tag">#azure</span>
+      <span class="tag">#pyspark</span>
+      <span class="tag">#powerbi</span>
+      <span class="tag">#generative-ai</span>
+      <span class="tag">#sql</span>
+      <span class="tag">#python</span>
+      <span class="tag">#databricks</span>
+      <span class="tag">#delta-lake</span>
+    </div>
+    <!-- Overall progress bar -->
+    <div class="overall-progress-card">
+      <div class="opc-header">
+        <span>Overall Completion</span>
+        <span class="opc-pct" id="hero-overall-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="hero-overall-bar" style="width:0%"></div>
+      </div>
+      <div class="opc-footer">
+        <span id="hero-completed">0</span> / <span id="hero-total">0</span> topics completed
+      </div>
+    </div>
+    <div class="hero-cta-row">
+      <button class="btn-primary" onclick="document.getElementById('phases').scrollIntoView({behavior:'smooth'})">Start Learning →</button>
+      <button class="btn-ghost" id="expand-all-btn">Expand All</button>
+    </div>
+  </div>
+  <div class="hero-float-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+</header>
+
+<!-- ===== PHASE TABS ===== -->
+<div class="phase-tabs-wrapper" id="phases">
+  <div class="phase-tabs" id="phase-tabs">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content" id="main-content">
+  <!-- Phase sections injected by JS -->
+</main>
+
+<!-- ===== QUICK REFERENCE ===== -->
+<section class="quick-ref-section" id="quick-reference">
+  <div class="qr-inner">
+    <h2 class="section-heading">⚡ Quick Reference</h2>
+    <div class="qr-tabs">
+      <button class="qr-tab active" data-tab="pyspark">PySpark Patterns</button>
+      <button class="qr-tab" data-tab="dax">DAX Patterns</button>
+      <button class="qr-tab" data-tab="adf">ADF Expressions</button>
+    </div>
+    <div class="qr-panels">
+      <div class="qr-panel active" id="panel-pyspark">
+<pre class="code-block"><code><span class="comment"># Read CSV with schema</span>
+<span class="kw">from</span> pyspark.sql.types <span class="kw">import</span> StructType, StructField, StringType, IntegerType
+schema = StructType([StructField(<span class="str">"id"</span>, IntegerType()), StructField(<span class="str">"name"</span>, StringType())])
+df = spark.read.csv(<span class="str">"path"</span>, schema=schema, header=<span class="kw">True</span>)
+
+<span class="comment"># Window function</span>
+<span class="kw">from</span> pyspark.sql <span class="kw">import</span> Window
+<span class="kw">import</span> pyspark.sql.functions <span class="kw">as</span> F
+w = Window.partitionBy(<span class="str">"dept"</span>).orderBy(F.desc(<span class="str">"salary"</span>))
+df.withColumn(<span class="str">"rank"</span>, F.dense_rank().over(w))
+
+<span class="comment"># Delta MERGE (Upsert)</span>
+<span class="kw">from</span> delta.tables <span class="kw">import</span> DeltaTable
+deltaTable = DeltaTable.forPath(spark, <span class="str">"/delta/events"</span>)
+deltaTable.alias(<span class="str">"tgt"</span>).merge(updates.alias(<span class="str">"src"</span>), <span class="str">"tgt.id = src.id"</span>) \
+  .whenMatchedUpdateAll().whenNotMatchedInsertAll().execute()</code></pre>
+      </div>
+      <div class="qr-panel" id="panel-dax">
+<pre class="code-block"><code><span class="comment">// YoY Growth %</span>
+YoY Growth =
+<span class="kw">VAR</span> CurrentYear = [Total Sales]
+<span class="kw">VAR</span> PriorYear = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(<span class="str">'Date'[Date]</span>))
+<span class="kw">RETURN</span> DIVIDE(CurrentYear - PriorYear, PriorYear)
+
+<span class="comment">// Running Total</span>
+Running Total =
+CALCULATE([Total Sales], FILTER(ALL(<span class="str">'Date'</span>), <span class="str">'Date'[Date]</span> &lt;= MAX(<span class="str">'Date'[Date]</span>)))
+
+<span class="comment">// Dynamic RLS</span>
+Is Current User =
+USERPRINCIPALNAME() = <span class="str">'Sales'[UserEmail]</span></code></pre>
+      </div>
+      <div class="qr-panel" id="panel-adf">
+<pre class="code-block"><code><span class="comment">// Dynamic file path with date</span>
+@concat(<span class="str">'raw/sales/'</span>, formatDateTime(utcnow(), <span class="str">'yyyy/MM/dd'</span>), <span class="str">'/sales.csv'</span>)
+
+<span class="comment">// Check if file exists condition</span>
+@equals(activity(<span class="str">'Get Metadata'</span>).output.exists, <span class="kw">true</span>)
+
+<span class="comment">// Pipeline parameter reference</span>
+@pipeline().parameters.paramName
+
+<span class="comment">// Variable reference</span>
+@variables(<span class="str">'varName'</span>)</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">⚡ DataStack<span style="color:var(--accent)">Pro</span></div>
+    <p class="footer-sub">Living document — update progress as modules are completed</p>
+    <div class="footer-links">
+      <span>Azure Data Engineering</span> · <span>PySpark</span> · <span>Delta Lake</span> · <span>Power BI</span> · <span>Generative AI</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>
